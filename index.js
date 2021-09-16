@@ -213,6 +213,12 @@ class ProjectManager extends Instructor {
     this.gradClassName = managerObj.gradClassName;
     this.favInstructor = managerObj.favInstructor;
   }
+  standUp(slackChannel) {
+    return `${this.name} announces to ${slackChannel}, @channel standy times!`;
+  }
+  debugsCode(studentObj, subject) {
+    return `${this.name} debugs ${studentObj.name}'s code on ${subject}`;
+  }
 }
 /*
   STRETCH PROBLEM (no tests!)
