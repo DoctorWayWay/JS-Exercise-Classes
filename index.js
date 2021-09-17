@@ -159,6 +159,21 @@ class Instructor extends Lambdasian {
   grade(studentObj, subject) {
     return `${studentObj.name} receives a perfect score on ${subject}`;
   }
+  gradeChange(studentObj) {
+    const oneOrTwo = Math.ceil(Math.random() * 2);
+    if (oneOrTwo === 1) {
+      studentObj.grade -= Math.ceil(Math.random() * 100);
+    } else {
+      studentObj.grade += Math.ceil(Math.random() * 100);
+    }
+    if (studentObj.grade < 0) {
+      return (studentObj.grade = 1);
+    } else if (studentObj.grade > 100) {
+      return (studentObj.grade = 100);
+    } else {
+      return studentObj.grade;
+    }
+  }
 }
 
 /*
@@ -182,6 +197,7 @@ class Student extends Lambdasian {
     this.previousBackground = studentObj.previousBackground;
     this.className = studentObj.className;
     this.favSubjects = studentObj.favSubjects;
+    this.grade = Math.ceil(Math.random() * 100);
   }
   listSubjects() {
     return `Loving ${this.favSubjects}`;
@@ -191,6 +207,15 @@ class Student extends Lambdasian {
   }
   sprintChallenge(subject) {
     return `${this.name} has begun sprint challenge on ${subject}`;
+  }
+  graduate() {
+    if (this.grade >= 70) {
+      return "Graduated";
+    } else if (this.grade < 70) {
+      return "Failed";
+    } else {
+      return "This student's test must be graded first.";
+    }
   }
 }
 
@@ -228,6 +253,36 @@ class ProjectManager extends Instructor {
       + This method, when called, will check the grade of the student and see if they're ready to graduate from Lambda School
       + If the student's grade is above a 70% let them graduate! Otherwise go back to grading their assignments to increase their score.
 */
+
+// Testing Stretch Goal
+const oliver = {
+  name: "Oliver",
+  age: 27,
+  location: "California",
+  previousBackground: "Sports Writer",
+  className: "Web51",
+  favSubjects: ["JS", "Java", "CSS"],
+};
+const emily = {
+  name: "Emily",
+  age: 30,
+  location: "Texas",
+  specialty: "Backend Development",
+  favLanguage: "Java",
+  catchPhrase: "It is not over until it is over.",
+};
+
+const studentOliver = new Student(oliver);
+const instructorEmily = new Instructor(emily);
+
+// Stretch Goal Events
+instructorEmily.gradeChange(studentOliver);
+
+// Logging Stretch Goal
+console.log(
+  `Oliver scored a ${studentOliver.grade}:`,
+  studentOliver.graduate()
+);
 
 //End of Challenge
 /* 🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑 */
